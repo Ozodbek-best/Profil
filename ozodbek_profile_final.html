@@ -1,0 +1,269 @@
+<html>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+  * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+  }
+  .wrap { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: #060d1a; 
+    min-height: 100vh; 
+    padding: 2rem 1rem 2.5rem; 
+  }
+  .content { 
+    max-width: 680px; 
+    margin: 0 auto; 
+  }
+
+  .hero-card {
+    background: linear-gradient(135deg, #0e3a6b, #1a5fa8);
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid rgba(100,170,255,0.15);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.1rem;
+  }
+  .hero-card::before { 
+    content:''; 
+    position:absolute; 
+    top:-60px; 
+    right:-60px; 
+    width:200px; 
+    height:200px; 
+    background:rgba(100,180,255,0.07); 
+    border-radius:50%; 
+  }
+  .hero-card::after { 
+    content:''; 
+    position:absolute; 
+    bottom:-40px; 
+    left:-40px; 
+    width:130px; 
+    height:130px; 
+    background:rgba(50,130,255,0.06); 
+    border-radius:50%; 
+  }
+
+  .avatar-row { 
+    display:flex; 
+    align-items:center; 
+    gap:1.1rem; 
+    margin-bottom:1.2rem; 
+    position:relative; 
+    z-index:1; 
+  }
+  .avatar { 
+    width:82px; 
+    height:82px; 
+    border-radius:50%; 
+    background:linear-gradient(135deg,#1565c0,#42a5f5); 
+    border:3px solid rgba(100,190,255,0.35); 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    font-family:'Sora',sans-serif; 
+    font-size:26px; 
+    font-weight:700; 
+    color:#e3f2fd; 
+    flex-shrink:0; 
+    position:relative; 
+  }
+  .avatar-online { 
+    position:absolute; 
+    bottom:4px; 
+    right:4px; 
+    width:13px; 
+    height:13px; 
+    background:#00e676; 
+    border-radius:50%; 
+    border:2px solid #0e3a6b; 
+  }
+  .full-name { 
+    font-family:'Sora',sans-serif; 
+    font-size:22px; 
+    font-weight:700; 
+    color:#e8f4ff; 
+    letter-spacing:-0.3px; 
+    line-height:1.2; 
+  }
+  .role-tag { 
+    display:inline-block; 
+    margin-top:5px; 
+    background:rgba(61,158,255,0.2); 
+    border:1px solid rgba(61,158,255,0.3); 
+    color:#90caf9; 
+    font-size:11.5px; 
+    font-weight:500; 
+    padding:3px 11px; 
+    border-radius:20px; 
+  }
+
+  .univ-row { 
+    display:flex; 
+    align-items:center; 
+    gap:9px; 
+    position:relative; 
+    z-index:1; 
+    margin-bottom:1.1rem; 
+  }
+  .univ-icon { 
+    width:36px; 
+    height:36px; 
+    background:rgba(255,255,255,0.08); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .univ-name { font-size:13px; font-weight:500; color:#b0d4f5; }
+  .univ-sub { font-size:11.5px; color:#4a7faa; margin-top:1px; }
+
+  .bio-text { font-size:13.5px; color:#7ba8cc; line-height:1.8; position:relative; z-index:1; border-top:1px solid rgba(100,170,255,0.12); padding-top:1rem; }
+  .bio-text strong { color:#a8d0f0; font-weight:500; }
+
+  .interest-row { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:1.1rem; }
+  .int-badge { display:flex; align-items:center; gap:5px; background:rgba(255,255,255,0.04); border:1px solid rgba(100,170,255,0.12); border-radius:8px; padding:5px 13px; font-size:12.5px; color:#9dd0ff; font-weight:500; }
+
+  .sec { background:rgba(13,28,60,0.6); border:1px solid rgba(100,170,255,0.09); border-radius:18px; padding:1.25rem; margin-bottom:1.1rem; }
+  .sec-title { font-family:'Sora',sans-serif; font-size:10.5px; font-weight:600; color:#3d9eff; letter-spacing:1.6px; text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:8px; }
+  .sec-title::after { content:''; flex:1; height:1px; background:rgba(61,158,255,0.13); }
+
+  .skill-row { margin-bottom:0.85rem; }
+  .skill-row:last-child { margin-bottom:0; }
+  .skill-head { display:flex; justify-content:space-between; margin-bottom:5px; align-items:center; }
+  .skill-label { font-size:13px; color:#a0c8ef; font-weight:500; display:flex; align-items:center; gap:6px; }
+  .skill-pct { font-size:12px; color:#4a7faa; font-weight:600; }
+  .track { background:rgba(255,255,255,0.06); border-radius:4px; height:5px; overflow:hidden; }
+  .fill { height:100%; border-radius:4px; transition:width 1.3s cubic-bezier(.4,0,.2,1); }
+  .f-blue { background:linear-gradient(90deg,#1565c0,#42a5f5); }
+  .f-cyan { background:linear-gradient(90deg,#00838f,#26c6da); }
+  .f-green { background:linear-gradient(90deg,#2e7d32,#66bb6a); }
+  .lv { font-size:10px; padding:2px 7px; border-radius:5px; font-weight:500; }
+  .lv-high { background:rgba(66,165,245,0.15); color:#90caf9; border:1px solid rgba(66,165,245,0.25); }
+  .lv-mid { background:rgba(38,198,218,0.13); color:#80deea; border:1px solid rgba(38,198,218,0.22); }
+  .lv-low { background:rgba(102,187,106,0.13); color:#a5d6a7; border:1px solid rgba(102,187,106,0.2); }
+
+  .cert-grid { display:flex; flex-direction:column; gap:8px; }
+  .cert-item { display:flex; align-items:center; gap:11px; background:rgba(255,255,255,0.025); border:1px solid rgba(100,170,255,0.08); border-radius:12px; padding:10px 14px; transition:border-color 0.2s; }
+  .cert-item:hover { border-color:rgba(61,158,255,0.25); }
+  .cert-ico { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+  .cert-name { font-size:13.5px; font-weight:500; color:#c5e0ff; }
+  .cert-tag { font-size:11px; color:#4a7faa; margin-top:1px; }
+  .cert-dot { margin-left:auto; width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+  .contact-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:9px; }
+  .contact-item { display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.025); border:1px solid rgba(100,170,255,0.08); border-radius:12px; padding:10px 13px; transition:border-color 0.2s; cursor:pointer; }
+  .contact-item:hover { border-color:rgba(61,158,255,0.28); }
+  .contact-ico { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+  .contact-label { font-size:10.5px; color:#3a6a96; text-transform:uppercase; letter-spacing:0.5px; }
+  .contact-value { font-size:12.5px; color:#5a8ab8; font-weight:500; margin-top:1px; font-style:italic; }
+</style>
+
+<div class="wrap">
+  <div class="content">
+
+    <!-- HERO -->
+    <div class="hero-card">
+      <div class="avatar-row">
+        <div class="avatar">OT<div class="avatar-online"></div></div>
+        <div>
+          <div class="full-name">Ozodbek Tursunaliyev</div>
+          <span class="role-tag">Dasturiy injiniring · TATU</span>
+        </div>
+      </div>
+      <div class="univ-row">
+        <div class="univ-icon">&#127979;</div>
+        <div>
+          <div class="univ-name">Toshkent axborot texnologiyalari universiteti</div>
+          <div class="univ-sub">Dasturiy injiniringi fakulteti · Talaba</div>
+        </div>
+      </div>
+      <div class="bio-text">
+        Axborot texnologiyalari va zamonaviy innovatsiyalarga qiziqadigan <strong>yosh mutaxassis</strong>. Dasturlash hamda <strong>sun'iy intellekt</strong> yo'nalishlarida bilimlarini rivojlantirib borayotgan, yangi texnologiyalarni o'rganish va amaliy loyihalar orqali tajriba orttirishga intiladigan shaxs. <strong>Kelajak texnologiyalarini yaratish</strong> va IT sohasiga munosib hissa qo'shish asosiy maqsadlardan biri.
+      </div>
+    </div>
+
+    <!-- Qiziqishlar -->
+    <div class="interest-row">
+      <span class="int-badge">&#8730; Matematika</span>
+      <span class="int-badge">&#9883; Fizika</span>
+      <span class="int-badge">&#128187; IT / Dasturlash</span>
+      <span class="int-badge">&#129302; Sun'iy intellekt</span>
+      <span class="int-badge">&#127942; Sertifikatlar</span>
+    </div>
+
+    <!-- Ko'nikmalar -->
+    <div class="sec">
+      <div class="sec-title">Ko'nikmalar</div>
+      <div class="skill-row">
+        <div class="skill-head"><span class="skill-label">Matematika <span class="lv lv-high">Yuqori</span></span><span class="skill-pct">90%</span></div>
+        <div class="track"><div class="fill f-blue" style="width:0" data-w="90%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-head"><span class="skill-label">Fizika <span class="lv lv-high">Yuqori</span></span><span class="skill-pct">90%</span></div>
+        <div class="track"><div class="fill f-cyan" style="width:0" data-w="90%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-head"><span class="skill-label">C++ <span class="lv lv-mid">O'rta</span></span><span class="skill-pct">70%</span></div>
+        <div class="track"><div class="fill f-blue" style="width:0" data-w="70%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-head"><span class="skill-label">Python <span class="lv lv-low">Boshlang'ich</span></span><span class="skill-pct">25%</span></div>
+        <div class="track"><div class="fill f-green" style="width:0" data-w="25%"></div></div>
+      </div>
+    </div>
+
+    <!-- Sertifikatlar -->
+    <div class="sec">
+      <div class="sec-title">Sertifikatlar</div>
+      <div class="cert-grid">
+        <div class="cert-item">
+          <div class="cert-ico" style="background:rgba(66,165,245,0.12);">&#8730;</div>
+          <div><div class="cert-name">Matematika</div><div class="cert-tag">Akademik sertifikat</div></div>
+          <div class="cert-dot" style="background:#42a5f5;"></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-ico" style="background:rgba(38,198,218,0.12);">&#9883;</div>
+          <div><div class="cert-name">Fizika</div><div class="cert-tag">Akademik sertifikat</div></div>
+          <div class="cert-dot" style="background:#26c6da;"></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-ico" style="background:rgba(66,133,244,0.13);">&#128737;</div>
+          <div><div class="cert-name">Google Cybersecurity</div><div class="cert-tag">Google · Coursera</div></div>
+          <div class="cert-dot" style="background:#4285f4;"></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-ico" style="background:rgba(52,168,83,0.13);">&#128202;</div>
+          <div><div class="cert-name">Google Data Analytics</div><div class="cert-tag">Google · Coursera</div></div>
+          <div class="cert-dot" style="background:#34a853;"></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-ico" style="background:rgba(251,188,4,0.12);">&#128203;</div>
+          <div><div class="cert-name">Google Project Management</div><div class="cert-tag">Google · Coursera</div></div>
+          <div class="cert-dot" style="background:#fbbc04;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aloqa -->
+    <div class="sec">
+      <div class="sec-title">Aloqa</div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-ico" style="background:rgba(66,165,245,0.12);">&#9993;</div>
+          <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:tursunaliyevozodbek16@gmail.com">tursunaliyevozodbek16@gmail.com</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-ico" style="background:rgba(41,182,246,0.12);">&#9992;</div>
+          <div><div class="contact-label">Telegram</div><div class="contact-value"><a href="https:/t.me/OzodbekTursunaliyev05">@OzodbekTursunaliyev05</a></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.fill').forEach(b => { b.style.width = b.getAttribute('data-w'); });
+  }, 400);
+</script>
+</html>
